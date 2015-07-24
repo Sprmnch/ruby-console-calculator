@@ -22,26 +22,56 @@ def modulus(num1, num2)
   num1 % num2
 end
 
-while true
-  puts "What would you like to calculate?"
-  math1 = gets.chomp.to_f
-  puts "What would you like to do with the number?"
-  math_operation = gets.chomp
-  puts "What other number would you like to use?"
-  math2 = gets.chomp.to_f
-  if math_operation == "+"
-    puts add(math1, math2)
-  elsif math_operation == "-"
-    puts subtract(math1, math2)
-  elsif math_operation == "*"
-    puts multiply(math1, math2)
-  elsif math_operation == "/"
-    puts divide(math1,math2)
-  elsif math_operation == "**"
-    puts power(math1,math2)
-  elsif math_operation == "%"
-    puts modulus(math1,math2)
+puts "Put in an expression"
+expression = gets.chomp
+
+operationChosen = false
+math1 = ""
+math2 = ""
+operation = ""
+charCount = 0
+
+expression.each_char do |char|
+  if operationChosen == false
+    case char
+      when "0".."9"
+        math1 += char
+      when "+"
+        operation = char
+        operationChosen = true
+      when "-"
+        operation = char
+        operationChosen = true
+      when "*"
+        operation += char
+        if operation == "**"
+          operationChosen = true
+        elsif expression[charCount+1] != "*"
+          operationChosen = true
+        end
+      when "%"
+        operation = char
+        operationChosen = true
+    end
   else
-    puts "That is not right!"
+    math2 += char
   end
+  charCount += 1
+end
+math1 = math1.to_f
+math2 = math2.to_f
+if operation == "+"
+  puts add(math1, math2)
+elsif operation == "-"
+  puts subtract(math1, math2)
+elsif operation == "*"
+  puts multiply(math1, math2)
+elsif operation == "/"
+  puts divide(math1,math2)
+elsif operation == "**"
+  puts power(math1,math2)
+elsif operation == "%"
+  puts modulus(math1,math2)
+else
+  puts "That is not right!"
 end
