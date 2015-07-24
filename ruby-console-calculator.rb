@@ -11,7 +11,7 @@ def multiply(num1, num2)
 end
 
 def divide(num1, num2)
-  num1.to_f / num2.to_f
+  num1 / num2
 end
 
 def power(num1, num2)
@@ -24,11 +24,11 @@ end
 
 while true
   puts "What would you like to calculate?"
-  math1 = gets.chomp
+  math1 = gets.chomp.to_f
   puts "What would you like to do with the number?"
   math_operation = gets.chomp
   puts "What other number would you like to use?"
-  math2 = gets.chomp
+  math2 = gets.chomp.to_f
   if math_operation == "+"
     puts add(math1, math2)
   elsif math_operation == "-"
