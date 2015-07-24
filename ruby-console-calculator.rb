@@ -1,77 +1,81 @@
+numArray = []
+opsArray = []
+
+puts "Enter an expression"
+expression = gets.chomp
+
+opsCounter = 0
+charCounter = 0
+
+expression.each_char do |char|
+  case char
+    when "0".."9"
+      numArray[opsCounter] = "#{numArray[opsCounter]}#{char}"
+    when "."
+      numArray[opsCounter] = "#{numArray[opsCounter]}#{char}"
+    when "+"
+      opsArray[opsCounter] = char
+      opsCounter += 1
+    when "-"
+      opsArray[opsCounter] = char
+      opsCounter += 1
+    when "*"
+      opsArray[opsCounter] = "#{opsArray[opsCounter]}#{char}"
+      if opsArray == "**"
+          opsCounter += 1
+      elsif expression[charCounter+1] != "*"
+          opsCounter += 1
+      end
+    when "/"
+      opsArray[opsCounter] = char
+      opsCounter += 1
+    when "%"
+      opsArray[opsCounter] = char
+      opsCounter += 1
+  end
+  charCounter += 1
+end
+
+numIntArray = numArray.map { |s| s.to_f }
+
 def add(num1, num2)
   num1 + num2
 end
-
 def subtract(num1, num2)
   num1 - num2
 end
-
 def multiply(num1, num2)
   num1 * num2
 end
-
 def divide(num1, num2)
   num1 / num2
 end
-
 def power(num1, num2)
   num1 ** num2
 end
-
 def modulus(num1, num2)
   num1 % num2
 end
 
-puts "Put in an expression"
-expression = gets.chomp
+opsArray.push("")
 
-operationChosen = false
-math1 = ""
-math2 = ""
-operation = ""
-charCount = 0
-
-expression.each_char do |char|
-  if operationChosen == false
-    case char
-      when "0".."9"
-        math1 += char
-      when "+"
-        operation = char
-        operationChosen = true
-      when "-"
-        operation = char
-        operationChosen = true
-      when "*"
-        operation += char
-        if operation == "**"
-          operationChosen = true
-        elsif expression[charCount+1] != "*"
-          operationChosen = true
-        end
-      when "%"
-        operation = char
-        operationChosen = true
-    end
-  else
-    math2 += char
+while opsArray[0] != ""
+  math1 = numIntArray.shift
+  math2 = numIntArray.shift
+  operation = opsArray.shift
+  
+  if operation == "+"
+    numIntArray.unshift(add(math1, math2))
+  elsif operation == "-"
+    numIntArray.unshift(subtract(math1, math2))
+  elsif operation == "*"
+    numIntArray.unshift(multiply(math1, math2))
+  elsif operation == "/"
+    numIntArray.unshift(divide(math1,math2))
+  elsif operation == "**"
+    numIntArray.unshift(power(math1,math2))
+  elsif operation == "%"
+    numIntArray.unshift(modulus(math1,math2))
   end
-  charCount += 1
 end
-math1 = math1.to_f
-math2 = math2.to_f
-if operation == "+"
-  puts add(math1, math2)
-elsif operation == "-"
-  puts subtract(math1, math2)
-elsif operation == "*"
-  puts multiply(math1, math2)
-elsif operation == "/"
-  puts divide(math1,math2)
-elsif operation == "**"
-  puts power(math1,math2)
-elsif operation == "%"
-  puts modulus(math1,math2)
-else
-  puts "That is not right!"
-end
+puts numIntArray
