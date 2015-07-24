@@ -17,3 +17,7 @@ end
 def power(num1, num2)
   num1 ** num2
 end
+
+def modulus(num1, num2)
+  num1 % num2
+end
