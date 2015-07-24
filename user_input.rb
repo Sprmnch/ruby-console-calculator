@@ -8,3 +8,14 @@ if math_operation == "+"
   puts add(math1, math2)
 elsif math_operation == "-"
   puts subtract(math1, math2)
+elsif math_operation == "*"
+  puts multiply(math1, math2)
+elsif math_operation == "/"
+  puts divide(math1,math2)
+elsif math_operation == "**"
+  puts power(math1,math2)
+elsif math_operation == "%"
+  puts modulus(math1,math2)
+else
+  puts "That is not right!"
+end
