@@ -21,7 +21,7 @@ expression.each_char do |char|
       opsCounter += 1
     when "*"
       opsArray[opsCounter] = "#{opsArray[opsCounter]}#{char}"
-      if opsArray == "**"
+      if opsArray[opsCounter] == "**"
           opsCounter += 1
       elsif expression[charCounter+1] != "*"
           opsCounter += 1
