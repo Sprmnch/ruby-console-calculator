@@ -20,12 +20,11 @@ expression.each_char do |char|
       opsArray[opsCounter] = char
       opsCounter += 1
     when "*"
-      opsArray[opsCounter] = "#{opsArray[opsCounter]}#{char}"
-      if opsArray[opsCounter] == "**"
-          opsCounter += 1
-      elsif expression[charCounter+1] != "*"
-          opsCounter += 1
-      end
+      opsArray[opsCounter] =char
+      opsCounter += 1
+    when "^"
+      opsArray[opsCounter]=char
+      opsCounter+=1
     when "/"
       opsArray[opsCounter] = char
       opsCounter += 1
@@ -72,7 +71,7 @@ while opsArray[0] != ""
     numIntArray.unshift(multiply(math1, math2))
   elsif operation == "/"
     numIntArray.unshift(divide(math1,math2))
-  elsif operation == "**"
+  elsif operation == "^"
     numIntArray.unshift(power(math1,math2))
   elsif operation == "%"
     numIntArray.unshift(modulus(math1,math2))
