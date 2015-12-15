@@ -41,7 +41,7 @@ end
 
 expression2 = ""
 
-for i in 0..complexArray[1].length-1
-  expression2+=complexArray[i][0][0].to_s+complexArray[i][1][0].to_s
+for i in 0..complexArray[0].length-1
+  expression2+=complexArray[i][0].to_s+complexArray[i][1].to_s
 end
 puts expression2
